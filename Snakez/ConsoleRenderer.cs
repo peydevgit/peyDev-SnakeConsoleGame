@@ -49,6 +49,7 @@
             }
         }
 
+        // Renderar objekten i listan samt kollar om den går in i väggen så ska den komma ut på andra sidan.
         public void Render()
         {
             foreach (GameObject obj in world.ObjectList)
