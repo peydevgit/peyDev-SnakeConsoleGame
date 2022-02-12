@@ -25,8 +25,8 @@
             /// Kolla om matbiten har samma position som player så blir den uppäten -- > loop inside a loop
             foreach (GameObject food in ObjectList.ToList())
             {
-                // Ifall objektet är av typen Food
-                if (food is Food)
+
+                if (food is Food) // Ifall objektet är av typen Food
                 { 
                     foreach (GameObject player in ObjectList.ToList())
                     {

@@ -5,6 +5,8 @@
         /// <summary>
         /// Checks Console to see if a keyboard key has been pressed, if so returns it, otherwise NoName.
         /// </summary>
+
+
         static ConsoleKey ReadKeyIfExists() => Console.KeyAvailable ? Console.ReadKey(intercept: true).Key : ConsoleKey.NoName;
 
         static void Loop()
@@ -14,12 +16,11 @@
             int GameHeight = 20;
             int StartScore = 0;
             
-          
 
             // Initialisera spelet
-            const int frameRate = 10;
-            GameWorld world = new GameWorld(GameWidth, GameHeight, StartScore);
-            ConsoleRenderer renderer = new ConsoleRenderer(world);
+            const int FrameRate = 10;
+            GameWorld World = new GameWorld(GameWidth, GameHeight, StartScore);
+            ConsoleRenderer Renderer = new ConsoleRenderer(World);
             
 
             // TODO Skapa spelare och andra objekt etc. genom korrekta anrop till vår GameWorld-instans
@@ -33,64 +34,37 @@
             PlayerHead.Direction = Player.Directions.Right;
            
             // vi renderar världens kanter en gång.
-            renderer.RenderWorld();
-            
+            Renderer.RenderWorld();
+            Console.CursorVisible = false;
             // Huvudloopen
             bool running = true;
             while (running)
             {
-                Console.CursorVisible = false;
-
                 
                 Console.Title = "Score: " + GameWorld.Score;
                 // Kom ihåg vad klockan var i början
-                DateTime before = DateTime.Now;
+                DateTime Before = DateTime.Now;
 
-                // Hantera knapptryckningar från användaren
                 ConsoleKey key = ReadKeyIfExists();
-                switch (key)
-                {
-                    case ConsoleKey.Escape:
-                        running = false;
-                        Console.WriteLine("You have Pressed the Wrong Key!!");
-                        break;
 
-                    case ConsoleKey.W:
-                    case ConsoleKey.UpArrow:
-                        if (PlayerHead.Direction != Player.Directions.Up)
-                            PlayerHead.Direction = Player.Directions.Up;
-                        break;
+                // Kollar ifall de trycker Escape för att avsluta.
+                if (key == ConsoleKey.Escape)
+                    running = false;
 
-                    case ConsoleKey.D:
-                    case ConsoleKey.RightArrow:
-                        if (PlayerHead.Direction != Player.Directions.Right)
-                            PlayerHead.Direction = Player.Directions.Right;
-                        break;
-
-                    case ConsoleKey.A:
-                    case ConsoleKey.LeftArrow:
-                        if (PlayerHead.Direction != Player.Directions.Left)
-                            PlayerHead.Direction = Player.Directions.Left;
-                        break;
-
-                    case ConsoleKey.S:
-                    case ConsoleKey.DownArrow:
-                        if (PlayerHead.Direction != Player.Directions.Down)
-                            PlayerHead.Direction = Player.Directions.Down;
-                        break;
-                }
+                // Hantera knapptryckningar från användaren -> static metod från Player.
+                Player.PlayerKeyInput(key, PlayerHead);
 
                 // Uppdatera världen och rendera om
-                renderer.RenderBlank();
-                world.Update();
-                renderer.Render();
+                Renderer.RenderBlank();
+                World.Update();
+                Renderer.Render();
 
                 // Mät hur lång tid det tog
-                double frameTime = Math.Ceiling((1000.0 / frameRate) - (DateTime.Now - before).TotalMilliseconds);
-                if (frameTime > 0)
+                double FrameTime = Math.Ceiling((1000.0 / FrameRate) - (DateTime.Now - Before).TotalMilliseconds);
+                if (FrameTime > 0)
                 {
                     // Vänta rätt antal millisekunder innan loopens nästa varv
-                    Thread.Sleep((int)frameTime);
+                    Thread.Sleep((int)FrameTime);
                 }
             }
         }

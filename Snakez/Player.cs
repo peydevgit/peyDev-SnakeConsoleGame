@@ -12,6 +12,35 @@
         {
 
         }
+        public static void PlayerKeyInput(ConsoleKey key,Player PlayerHead)
+        {
+            switch (key)
+            {
+                case ConsoleKey.W:
+                case ConsoleKey.UpArrow:
+                    if (PlayerHead.Direction != Directions.Up)
+                        PlayerHead.Direction = Directions.Up;
+                    break;
+
+                case ConsoleKey.D:
+                case ConsoleKey.RightArrow:
+                    if (PlayerHead.Direction != Directions.Right)
+                        PlayerHead.Direction = Directions.Right;
+                    break;
+
+                case ConsoleKey.A:
+                case ConsoleKey.LeftArrow:
+                    if (PlayerHead.Direction != Directions.Left)
+                        PlayerHead.Direction = Directions.Left;
+                    break;
+
+                case ConsoleKey.S:
+                case ConsoleKey.DownArrow:
+                    if (PlayerHead.Direction != Directions.Down)
+                        PlayerHead.Direction = Directions.Down;
+                    break;
+            }
+        }
       
         public override void Update()
         {
