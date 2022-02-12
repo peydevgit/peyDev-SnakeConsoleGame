@@ -10,8 +10,8 @@
             Console.WindowWidth = gameWorld.Width + 1;
             world = gameWorld;
         }
-        // en metod vi kommer använda flera gånger av för att förminska koden!
-        public void RenderObjects(int X, int Y, char character)
+        // en static metod vi kommer använda flera gånger av för att förminska koden!
+        public static void RenderObjects(int X, int Y, char character)
         {
             Console.SetCursorPosition(X, Y);
             Console.Write(character);
@@ -41,7 +41,7 @@
         /// </summary>
         public void RenderBlank()
         {
-            foreach (GameObject obj in world.ObjectList)
+            foreach (GameObject obj in GameWorld.ObjectList)
             {
                 // vi renderar blank efter spelaren bara annars när en food äts upp så kommer båda blinka en gång för att de är på samma position.
                 if (obj is Player)
@@ -52,7 +52,7 @@
         // Renderar objekten i listan samt kollar om den går in i väggen så ska den komma ut på andra sidan.
         public void Render()
         {
-            foreach (GameObject obj in world.ObjectList)
+            foreach (GameObject obj in GameWorld.ObjectList)
             {
                 if (obj is Player)
                 {

@@ -14,8 +14,7 @@
             int GameHeight = 20;
             int StartScore = 0;
             
-            // Random variabeln
-            Random random = new Random();
+          
 
             // Initialisera spelet
             const int frameRate = 10;
@@ -25,9 +24,9 @@
 
             // TODO Skapa spelare och andra objekt etc. genom korrekta anrop till vår GameWorld-instans
             Player PlayerHead = new Player(new Position(5, 5), '@'); // Första Spelaren
-            Food food = new Food(new Position(random.Next(2, 48), random.Next(2, 19)), '$'); // Första Fooden
-            world.ObjectList.Add(PlayerHead);
-            world.ObjectList.Add(food);
+            Food Food = new Food(new Position(GameWorld.Random.Next(2, GameWidth-2), GameWorld.Random.Next(2, GameHeight-2)), '$'); // Första Fooden
+            GameWorld.ObjectList.Add(PlayerHead);
+            GameWorld.ObjectList.Add(Food);
             
 
             // Start värden innan spelet börjar.
@@ -43,7 +42,7 @@
                 Console.CursorVisible = false;
 
                 
-                Console.Title = "Score: " + world.Score;
+                Console.Title = "Score: " + GameWorld.Score;
                 // Kom ihåg vad klockan var i början
                 DateTime before = DateTime.Now;
 

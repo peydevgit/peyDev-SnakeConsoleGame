@@ -2,13 +2,13 @@
 {
     public class GameWorld
     {
-        Random random = new Random();
+        public static Random Random = new Random();
 
-        public List<GameObject> ObjectList = new List<GameObject>();
+        public static List<GameObject> ObjectList = new List<GameObject>();
 
         public int Width;
         public int Height;
-        public int Score;
+        public static int Score;
 
         public GameWorld(int x, int y, int score)
         {
@@ -37,16 +37,7 @@
                             // Jämnför positionerna 
                             if (food.Position.X == player.Position.X && food.Position.Y == player.Position.Y)
                             {
-                                //Raderar matbiten som har blivit uppäten.
-                                ObjectList.Remove(food);
-                                
-                                //Skapar en ny food..(En förbättring skulle nog vara att inte ta bort maten men bara byta till en ny random position)
-                                Food NewFood = new Food(new Position(random.Next(2, 48), random.Next(2, 18)), '$');
-                                ObjectList.Add(NewFood);
-
-                                // Beep and lägger till poäng för att ha ätit upp den.
-                                Console.Beep();
-                                Score++;
+                                Food.EatFood(food);
                             }
                         }
                     }
