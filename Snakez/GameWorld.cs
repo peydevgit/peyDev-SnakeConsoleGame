@@ -27,15 +27,12 @@
             {
                 // Ifall objektet är av typen Food
                 if (food is Food)
-                {
-                    // Hämta spelar instansen med hjälp av Linq (Kommer bara funka ifall det finns 1 och enbart 1 instans av Player pga .Single)
+                { 
                     foreach (GameObject player in ObjectList.ToList())
                     {
-                        // Ifall objektet är av typen Food
                         if (player is Player)
                         {
-                            // Jämnför positionerna 
-                            if (food.Position.X == player.Position.X && food.Position.Y == player.Position.Y)
+                            if (food.Position.X == player.Position.X && food.Position.Y == player.Position.Y) // Jämnför positionerna 
                             {
                                 Food.EatFood(food);
                             }
